@@ -1,8 +1,7 @@
 # Archivos generados por flex
 *.l.swp
 *.yy.c
+.analizador_lexico.l.swp
 
 # archivos generados por el compilador de C
 *.o
-
-
