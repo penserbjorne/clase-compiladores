@@ -2,20 +2,18 @@
 #include<stdio.h> 
 %}
 
-/* Palabras reservadas */
-
 /* Identificadores */
 L=[az-AZ]
 G=_
 N=[0-9]
 
 /* Numeros */
-F= -
-P= .
+F=-
+P=.
 
 /* Comentarios */
-D= /
-A= *
+D=/
+A=*
 
 /* Cadenas de texto */
 C="
@@ -25,11 +23,12 @@ S='
 %option noyywrap
 
 %%
-(L|G)(L*|G*|N*)* {printf("Identificador: %s",yytext);}
-(FN+|N+)(F?(N*))? {printf("Numero: %s",yytext);}
-D(D+L*|A+L*A+(L*A*)*D) {printf("Comentario: %s",yytext);}
-(CL*C|SL*S) {printf("Cadena de texto: %s",yytext);}
-.* {printf("No aceptada: %s",yytext);}
+(auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while) {printf("Palabra reservada: %s", yytext);}
+G?(L*|G*|N*)* {printf("Identificador: %s", yytext);}
+(FN+|N+)(F?(N*))? {printf("Numero: %s", yytext);}
+D(D+L*|A+L*A+(L*A*)*D) {printf("Comentario: %s", yytext);}
+(CL*C|SL*S) {printf("Cadena de texto: %s", yytext);}
+.* {printf("No aceptada: %s", yytext);}
 %%
 
 int main(int argc, char *argv[]){
@@ -41,4 +40,6 @@ int main(int argc, char *argv[]){
 		exit(0);
 	}
 	yylex();
+	printf("Programa analizado correctamente.\n\n");
+	return 0;
 }
