@@ -2,18 +2,34 @@
 #include<stdio.h> 
 %}
 
-/* Identificadores */
-L=[abcdefghijklmnopqrstuvwxyz]
-G=_
-N=[0123456789]
+/* Palabras reservadas */
 
+/* Identificadores */
+L=[az-AZ]
+G=_
+N=[0-9]
+
+/* Numeros */
+F= -
+P= .
+
+/* Comentarios */
+D= /
+A= *
+
+/* Cadenas de texto */
+C="
+S='
 
 %option yylineno
 %option noyywrap
 
 %%
-(L|G)(L*|G*|N*)*  {printf("\nPalabra reconocida: %s",yytext);}
-.* {printf("\nPalabra no reconocida: %s",yytext);}
+(L|G)(L*|G*|N*)* {printf("Identificador: %s",yytext);}
+(FN+|N+)(F?(N*))? {printf("Numero: %s",yytext);}
+D(D+L*|A+L*A+(L*A*)*D) {printf("Comentario: %s",yytext);}
+(CL*C|SL*S) {printf("Cadena de texto: %s",yytext);}
+.* {printf("No aceptada: %s",yytext);}
 %%
 
 int main(int argc, char *argv[]){
