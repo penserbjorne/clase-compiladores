@@ -1,0 +1,7 @@
+# Archivos generados por flex
+*.yy.c
+
+# archivos generados por el compilador de C
+*.o
+
+
