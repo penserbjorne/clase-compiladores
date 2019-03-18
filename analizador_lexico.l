@@ -2,13 +2,18 @@
 #include<stdio.h> 
 %}
 
+/* Identificadores */
+L=[abcdefghijklmnopqrstuvwxyz]
+G=_
+N=[0123456789]
 
 
 %option yylineno
 %option noyywrap
 
 %%
-
+(L|G)(L*|G*|N*)*  {printf("\nPalabra reconocida: %s",yytext);}
+.* {printf("\nPalabra no reconocida: %s",yytext);}
 %%
 
 int main(int argc, char *argv[]){
