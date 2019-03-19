@@ -1,3 +1,9 @@
+/*
+Aguilar Enriquez Paul Sebastian 415028130
+Berdejo Arvizu Oscar 312232188
+Urcid García Amín 310337555
+*/
+
 %{
 #include<stdio.h> 
 %}
