@@ -29,33 +29,15 @@ void yyerror(const char *s);
 %token <sval> NUMERO
 %token <sval> COMENTARIO
 %token <sval> CADENA
+%token <sval> NOPE
 
 %%
 
-exp_reservada:
-      |
-      RESERVADA { printf("%s", $1); }
-      ;
+entrada: /* vacio */
+  | exp { printf("SINTACTICO -> exp\n");}
+  ;
 
-exp_identificador:
-      |
-      IDENTIFICADOR { printf("%s", $1); }
-      ;
-
-exp_numero:
-      |
-      NUMERO { printf("%s", $1); }
-      ;
-
-exp_comentario:
-      |
-      COMENTARIO { printf("%s", $1); }
-      ;
-
-exp_cadena:
-      |
-      CADENA { printf("%s", $1); }
-      ;
+exp: NOPE { printf("SINTACTICO -> %s\n", $1); };
 
 %%
 
@@ -74,6 +56,7 @@ int main(int argc, char *argv[]){
 }
 
 void yyerror(const char *s){
-  printf("\n\tERROR -> %s en simbolo %s en la linea %i\n", s, yytext, yylineno);
-  exit(-1);
+  printf("\tSINTACTICO -> ERROR -> %s en simbolo %s en la linea %i\n", s, yytext, yylineno);
+  yyparse();
+  //exit(-1);
 }
