@@ -33,7 +33,8 @@ void yyerror(const char *s);
 
 %%
 
-inicio: exp_comentario | exp_fun | exp_if | exp_switch | /*vacio*/;
+inicio:
+  exp_comentario | exp_fun | exp_if | exp_switch | exp_while | exp_for | /*vacio*/;
 
 exp_comentario: COMENTARIO inicio{
     printf("SINTACTICO -> COMENTARIO -> %s\n", $1);
@@ -60,12 +61,12 @@ exp_if: RESERVADA TLPAREN exp_if2 TRPAREN exp_if5 exp_if6 inicio {
 exp_if2: exp_if3
   | TLPAREN exp_if2 TRPAREN;
 
-exp_if3: exp_if3 exp_if4 exp_if3
+exp_if3: exp_if3 exp_ops exp_if3
   | IDENTIFICADOR
   | NUMERO
   | exp_if3;
 
-exp_if4: TCGT | TCLT | TCGE | TCLE | TCNE | TCEQ | TAND | TOR ;
+exp_ops: TCGT | TCLT | TCGE | TCLE | TCNE | TCEQ | TAND | TOR ;
 
 exp_if5: TLBRACE TRBRACE
   | exp_if3 TDOTCOMMA
@@ -95,9 +96,43 @@ exp_while: RESERVADA exp_w2 inicio {
   }
 
 exp_w2: TLPAREN exp_w2 TRPAREN
-  | exp_w2 exp_if4 exp_w2
+  | exp_w2 exp_ops exp_w2
   | IDENTIFICADOR
   | NUMERO
+  ;
+
+exp_for: RESERVADA TLPAREN exp_f2 TDOTCOMMA exp_f4 TDOTCOMMA exp_f4 TRPAREN exp_f6{
+    printf("SINTACTICO -> FOR \n");
+  }
+
+exp_f2: RESERVADA exp_f3
+  | exp_f4
+  | /* vacio */
+  ;
+
+exp_f3: exp_f3 TEQUAL exp_f4
+  | exp_f3 exp_f4
+  | IDENTIFICADOR
+  | NUMERO
+  ;
+
+exp_f4: TLPAREN exp_f4 TRPAREN
+  | exp_f4 exp_ops exp_f4
+  | exp_f4 TCOMMA exp_f4
+  | exp_f4 TPLUS TPLUS
+  | exp_f4 TMINUS TMINUS
+  | TPLUS TPLUS exp_f4
+  | TMINUS TMINUS exp_f4
+  | IDENTIFICADOR
+  | NUMERO
+  | /* vacio */
+  ;
+
+exp_f6: TLBRACE TRBRACE
+  | exp_f4 TDOTCOMMA
+  | RESERVADA TDOTCOMMA
+  | TDOTCOMMA
+  | exp_for
   ;
 %%
 

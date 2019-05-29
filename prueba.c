@@ -31,3 +31,10 @@ switch(x){
   case 3:
     break;
   }
+
+// while
+while ( EOF == NULL)
+
+// for
+for (i = 0; i < count; i++) {
+}
