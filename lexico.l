@@ -51,13 +51,15 @@ W [ \t]+
 "}" { IMPRIMIR_TOKEN; return GUARDAR_TOKEN2(TRBRACE); }
 "." { IMPRIMIR_TOKEN; return GUARDAR_TOKEN2(TDOT); }
 "," { IMPRIMIR_TOKEN; return GUARDAR_TOKEN2(TCOMMA); }
+";" { IMPRIMIR_TOKEN; return GUARDAR_TOKEN2(TDOTCOMMA); }
+":" { IMPRIMIR_TOKEN; return GUARDAR_TOKEN2(TDOBLEDOT); }
 "+" { IMPRIMIR_TOKEN; return GUARDAR_TOKEN2(TPLUS); }
 "-" { IMPRIMIR_TOKEN; return GUARDAR_TOKEN2(TMINUS); }
 "*" { IMPRIMIR_TOKEN; return GUARDAR_TOKEN2(TMUL); }
 "/" { IMPRIMIR_TOKEN; return GUARDAR_TOKEN2(TDIV); }
 
 (auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while) {
-		printf("LEXICO -> PALABRA RESERVADA -> %s\n", yytext);
+		printf("LEXICO -> RESERVADA -> %s\n", yytext);
 		GUARDAR_TOKEN;
 		return RESERVADA;
 	}
@@ -86,13 +88,12 @@ W [ \t]+
 		return CADENA;
 	}
 
-{B} {/* ignore end of line */;}
+{B} {/* ignora final de linea */;}
 
-{W} {/* ignore whitespace */;}
+{W} {/* ignora espacios en blanco */;}
 
-.* {
-		printf("LEXICO -> NO ACEPTADA -> %s\n", yytext);
-		printf("\tLEXICO -> ERROR -> en simbolo \"%s\" en la linea %i\n", yytext, yylineno);
+. {
+		printf("\tLEXICO -> ERROR -> NO ACEPTADO el simbolo \"%s\" en la linea %i\n", yytext, yylineno);
 		yyterminate();
 	}
 %%

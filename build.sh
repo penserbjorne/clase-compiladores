@@ -8,5 +8,5 @@ rm -rf .lexico.l.swp
 bison -d sintactico.y
 flex -o lexico.yy.c lexico.l
 gcc lexico.yy.c sintactico.tab.c -o analizador.o
-./analizador.o prueba.txt
-#./analizador.o prueba.c
+#./analizador.o prueba.txt
+./analizador.o prueba.c
