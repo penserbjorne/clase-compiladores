@@ -1,7 +1,11 @@
 # Archivos generados por flex
 *.l.swp
 *.yy.c
-.analizador_lexico.l.swp
+.lexico.l.swp
+
+# Archivos generados por bison
+*.tab.c
+*.tab.h
 
 # archivos generados por el compilador de C
 *.o
