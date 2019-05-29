@@ -1,7 +1,7 @@
 /*
-Aguilar Enriquez Paul Sebastian 415028130
-Berdejo Arvizu Oscar 312232188
-Urcid García Amín 310337555
+  Aguilar Enriquez Paul Sebastian 415028130
+  Berdejo Arvizu Oscar 312232188
+  Urcid García Amín 310337555
 */
 
 %{
@@ -9,27 +9,26 @@ Urcid García Amín 310337555
 #include <stdio.h>
 
 // Cosas que bison necesita saber de flex
-extern int yylex();
-extern int yyparse();
 extern FILE *yyin;
 extern int yylineno;
 extern char *yytext;
+extern int yylex();
+extern int yyparse();
 
 void yyerror(const char *s);
 %}
 
 %union {
-  int ival;
+  //int ival;
   float fval;
-  char *sval;
-}
+  char sval[50];
+};
 
 %token <sval> RESERVADA
 %token <sval> IDENTIFICADOR
-%token <sval> NUMERO
+%token <fval> NUMERO
 %token <sval> COMENTARIO
 %token <sval> CADENA
-%token <sval> NOPE
 
 %%
 
@@ -37,7 +36,7 @@ entrada: /* vacio */
   | exp { printf("SINTACTICO -> exp\n");}
   ;
 
-exp: NOPE { printf("SINTACTICO -> %s\n", $1); };
+exp: NUMERO { printf("SINTACTICO -> %f\n", $1); };
 
 %%
 
@@ -51,12 +50,12 @@ int main(int argc, char *argv[]){
 	}
 
   yyparse();
-	printf("Programa analizado correctamente.\n\n");
+	printf("\nAnalisis terminado.\n\n");
 	return 0;
 }
 
 void yyerror(const char *s){
-  printf("\tSINTACTICO -> ERROR -> %s en simbolo %s en la linea %i\n", s, yytext, yylineno);
+  printf("\tSINTACTICO -> ERROR -> %s en simbolo \"%s\" en la linea %i\n", s, yytext, yylineno);
   yyparse();
   //exit(-1);
 }

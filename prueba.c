@@ -1,13 +1,8 @@
-/*
-    Autor: Aguilar Enriquez Paul Sebastian
-    Descripcion: Un analizador lexico que verifica
-        si las palabras de un archivo contienen
-        las 5 vocales del abecedario.
-*/
-#include <stdio.h>
-#include <stdlib.h>
+/* Autor: Aguilar Enriquez Paul Sebastian , Descripcion: Un analizador lexico que verifica si las palabras de un archivo contienen las 5 vocales del abecedario. */
+//#include <stdio.h>
+//#include <stdlib.h>
 
-#define MAXFILENAME 256
+//#define MAXFILENAME 256
 
 void cleanBuffer(){
     while(getchar() != '\n');
