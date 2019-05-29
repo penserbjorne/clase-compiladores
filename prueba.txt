@@ -1,15 +1,3 @@
-/* */
-PA
-PE
-PI
-PO
-PU
-pa
-pe
-pi
-po
-pu
-
 // Esto es un comentario
 /* Esto es otro comentario */
 
@@ -87,3 +75,21 @@ iden_12
 "Esto es una cadena"
 "Esto es otra cadena"
 'Esto tambien es una cadena'
+
+=
+==
+!=
+<
+<=
+>
+>=
+(
+)
+{
+}
+.
+,
++
+-
+*
+/

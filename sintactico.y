@@ -19,24 +19,23 @@ void yyerror(const char *s);
 %}
 
 %union {
-  //int ival;
+  int ival;
   float fval;
   char sval[50];
 };
 
-%token <sval> RESERVADA
-%token <sval> IDENTIFICADOR
+%token <sval> RESERVADA IDENTIFICADOR COMENTARIO CADENA
 %token <fval> NUMERO
-%token <sval> COMENTARIO
-%token <sval> CADENA
+%token <ival> TEQUAL TCEQ TCNE TCLT TCLE TCGT TCGE TLPAREN TRPAREN
+%token <ival> TLBRACE TRBRACE TDOT TCOMMA TPLUS TMINUS TMUL TDIV
 
 %%
 
 entrada: /* vacio */
-  | exp { printf("SINTACTICO -> exp\n");}
+  | exp { printf("SINTACTICO -> EXP -> exp\n");}
   ;
 
-exp: NUMERO { printf("SINTACTICO -> %f\n", $1); };
+exp: NUMERO { printf("SINTACTICO -> NUMERO -> %f\n", $1); };
 
 %%
 
